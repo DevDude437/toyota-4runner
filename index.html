@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toyota 4Runner Generations Encyclopedia</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"/>
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"/>
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"/>
+    <link rel="manifest" href="/site.webmanifest"/>
+    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        forest: {
+                            800: '#1e3329',
+                            900: '#12221b',
+                            950: '#0a1611',
+                        },
+                        bronze: {
+                            500: '#c28e38',
+                            600: '#a3732a',
+                        },
+                        rugged: {
+                            800: '#222624',
+                            900: '#171a18',
+                            950: '#0e100f'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Chakra Petch', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="min-h-screen flex flex-col custom-scrollbar selection:bg-bronze-500 selection:text-black">
+
+    <header class="sticky top-0 z-40 backdrop-blur-md bg-rugged-950/80 border-b border-rugged-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="w-12 h-12 rounded-lg bg-gradient-to-br from-bronze-500 to-forest-800 flex items-center justify-center shadow-lg border border-bronze-500/30">
+                    <i class="fa-solid fa-mountain-terrain text-white text-xl"></i>
+                </div>
+                <div>
+                    <span class="text-xs tracking-widest text-bronze-500 font-bold uppercase font-heading block">TOYOTA ARCHIVE</span>
+                    <h1 class="text-2xl font-bold font-heading text-white tracking-wider">4RUNNER LEGACY</h1>
+                </div>
+            </div>
+            <div class="hidden md:flex items-center space-x-6 text-sm text-gray-400 font-medium">
+                <span class="flex items-center space-x-2"><i class="fa-solid fa-shield-halved text-bronze-500"></i><span>1984 - Present</span></span>
+                <span class="flex items-center space-x-2"><i class="fa-solid fa-compass text-bronze-500"></i><span>6 Generations</span></span>
+            </div>
+        </div>
+    </header>
+
+    <section class="relative py-16 lg:py-24 overflow-hidden border-b border-rugged-800 bg-gradient-to-b from-rugged-900 to-rugged-950">
+        <div class="absolute inset-0 opacity-15 bg-[radial-gradient(#c28e38_1px,transparent_1px)] [background-size:24px_24px]"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+            <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-bronze-500/10 border border-bronze-500/30 text-bronze-500 text-xs font-heading font-semibold tracking-wider mb-6">
+                <i class="fa-solid fa-fire text-xs"></i><span>THE ULTIMATE OFF-ROAD ICON</span>
+            </div>
+            <h2 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold font-heading text-white uppercase tracking-tight mb-6">
+                Evolution of the <span class="text-transparent bg-clip-text bg-gradient-to-r from-bronze-500 to-amber-600">Legend</span>
+            </h2>
+            <p class="max-w-3xl mx-auto text-base sm:text-lg text-gray-400 mb-10">
+                From its roots as a removable-top Hilux pickup utility vehicle to the high-tech turbocharged off-road beast of today. Explore the complete history, engineering milestones, and specs of every 4Runner generation.
+            </p>
+
+            <div class="max-w-2xl mx-auto flex flex-col sm:flex-row gap-3">
+                <div class="relative flex-1">
+                    <span class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-gray-500">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </span>
+                    <input type="text" id="searchInput" placeholder="Search by generation, year, engine, or feature..."
+                        class="w-full pl-11 pr-4 py-3.5 bg-rugged-900 border border-rugged-800 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-bronze-500 transition-colors text-sm font-medium">
+                </div>
+                <div class="flex gap-2 overflow-x-auto pb-2 sm:pb-0">
+                    <button onclick="filterGenerations('all')" id="filter-all" class="filter-btn px-4 py-3 bg-bronze-500 text-black font-heading font-bold text-xs uppercase rounded-xl transition-all whitespace-nowrap shadow-md">All Gens</button>
+                    <button onclick="filterGenerations('classic')" id="filter-classic" class="filter-btn px-4 py-3 bg-rugged-900 hover:bg-rugged-800 border border-rugged-800 text-gray-300 font-heading font-bold text-xs uppercase rounded-xl transition-all whitespace-nowrap">Classic (1-3)</button>
+                    <button onclick="filterGenerations('modern')" id="filter-modern" class="filter-btn px-4 py-3 bg-rugged-900 hover:bg-rugged-800 border border-rugged-800 text-gray-300 font-heading font-bold text-xs uppercase rounded-xl transition-all whitespace-nowrap">Modern (4-6)</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 w-full">
+        <div id="noResults" class="hidden text-center py-20">
+            <i class="fa-solid fa-triangle-exclamation text-4xl text-bronze-500 mb-4"></i>
+            <h3 class="text-xl font-heading font-bold text-white mb-2">No Generations Found</h3>
+            <p class="text-gray-400 text-sm">Try adjusting your search query or filter criteria.</p>
+        </div>
+
+        <div id="generationsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Populated via JavaScript -->
+        </div>
+    </main>
+
+    <div id="detailModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300">
+        <div class="rugged-card w-full max-w-4xl max-h-[90vh] overflow-y-auto rounded-2xl transform scale-95 transition-transform duration-300 custom-scrollbar relative" id="modalContentWrapper">
+            <button onclick="closeModal()" class="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-rugged-900 border border-rugged-800 text-gray-400 hover:text-white hover:border-bronze-500 flex items-center justify-center transition-colors">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+            <div id="modalBody">
+                <!-- Injected dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-rugged-950 border-t border-rugged-800 py-12 text-center text-gray-500 text-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-center space-x-3 mb-4">
+                <i class="fa-solid fa-mountain-sun text-bronze-500 text-xl"></i>
+                <span class="font-heading font-bold text-white tracking-wider">TOYOTA 4RUNNER ARCHIVE</span>
+            </div>
+            <p class="mb-4">Dedicated to the evolution of reliability, capability, and off-road excellence.</p>
+            <p class="text-xs text-gray-600">&copy; 2026 Toyota 4Runner Legacy. All vehicle names, logos, and brands are property of their respective owners.</p>
+        </div>
+    </footer>
+
+    <script>
+        const generations = [
+            {
+                id: 1,
+                name: "1st Generation",
+                years: "1984 – 1989",
+                category: "classic",
+                codename: "N60",
+                tagline: "The birth of the 4RUNNER",
+                summary: "Based on the Toyota Hilux/Pickup, the 1st Gen featured a fiberglass removable shell over the rear seats, creating a rugged open-air utility vehicle.",
+                image: "gen1.jpg",
+                fallbackSvg: "1st Gen 4Runner",
+                engines: [
+                    { name: "2.4L 22R Carbureted I4", hp: "97 hp", torque: "128 lb-ft" },
+                    { name: "2.4L 22R-E Fuel Injected I4", hp: "115 hp", torque: "140 lb-ft" },
+                    { name: "3.0L 3VZE V6 (1988+)", hp: "150 hp", torque: "180 lb-ft" }
+                ],
+                transmissions: "4-speed automatic, 5-speed manual",
+                drivetrain: "Part-time 4WD with solid front axle (up to 1985) / Independent front suspension (1986+)",
+                iconicFeatures: [
+                    "Removable fiberglass top",
+                    "Fold-down tailgate with roll-down rear window",
+                    "Legendary indestructible 22R-E engine",
+                    "Solid front axle on 1984–1985 models (highly sought after by rock crawlers)"
+                ],
+                designHistory: "Essentially a Hilux pickup truck with a fiberglass cab added to the bed. It offered rugged simplicity, utilitarian interior with aftermarket sport bars, and instant off-road cred."
+            },
+            {
+                id: 2,
+                name: "2nd Generation",
+                years: "1990 – 1995",
+                category: "classic",
+                codename: "N120 / N130",
+                tagline: "The Transition to Full SUV",
+                summary: "The 2nd Generation traded its removable top for a fully integrated steel body, making it a more refined family SUV while retaining serious off-road capability.",
+                image: "gen2.jpg",
+                fallbackSvg: "2nd Gen 4Runner",
+                engines: [
+                    { name: "2.4L 22R-E I4", hp: "115 hp", torque: "140 lb-ft" },
+                    { name: "3.0L 3VZE V6", hp: "150 hp", torque: "180 lb-ft" }
+                ],
+                transmissions: "4-speed automatic, 5-speed manual",
+                drivetrain: "Rear-wheel drive (RWD) or Part-time 4WD",
+                iconicFeatures: [
+                    "Full steel station wagon body style",
+                    "Power roll-down rear window retained in tailgate",
+                    "Available 4-door configuration from launch",
+                    "Coil-spring rear suspension for smoother ride",
+                    "2-Door option in 1990-91"
+                ],
+                designHistory: "Aerodynamic styling replaced the boxy lines of the 80s. Available in 2-door and 4-door variants initially, though the 4-door quickly dominated sales due to increased practicality."
+            },
+            {
+                id: 3,
+                name: "3rd Generation",
+                years: "1996 – 2002",
+                category: "classic",
+                codename: "N180",
+                tagline: "The Classic Golden Era",
+                summary: "Completely redesigned from the ground up, the 3rd Gen introduced the legendary 3.4L V6 engine and is widely considered by enthusiasts to be one of the most reliable SUVs ever built.",
+                image: "gen3.jpg",
+                fallbackSvg: "3rd Gen 4Runner",
+                engines: [
+                    { name: "2.7L 3RZ-FE I4", hp: "150 hp", torque: "177 lb-ft" },
+                    { name: "3.4L 5VZ-FE V6", hp: "183 hp", torque: "217 lb-ft" }
+                ],
+                transmissions: "4-speed automatic, 5-speed manual",
+                drivetrain: "Multi-Mode 4WD (selectable 2WD/4WD high/low with center differential)",
+                iconicFeatures: [
+                    "Bulletproof 3.4L V6 engine",
+                    "Electronic locking rear differential option (Limited trim)",
+                    "Exceptional resale value and longevity"
+                ],
+                designHistory: "Sleeker, more curvaceous exterior with a spacious, ergonomic interior. It established the modern 4Runner stance and comfort benchmark."
+            },
+            {
+                id: 4,
+                name: "4th Generation",
+                years: "2003 – 2009",
+                category: "modern",
+                codename: "N210",
+                tagline: "Power and V8 Muscle",
+                summary: "Grown larger and more powerful, the 4th Gen introduced a potent 4.7L V8 engine alongside the refined 4.0L V6, bringing modern luxury amenities and advanced off-road tech like X-REAS.",
+                image: "gen4.jpg",
+                fallbackSvg: "4th Gen 4Runner",
+                engines: [
+                    { name: "4.0L 1GR-FE V6", hp: "236-245 hp", torque: "266-283 lb-ft" },
+                    { name: "4.7L 2UZ-FE V8", hp: "235-260 hp", torque: "320-306 lb-ft" }
+                ],
+                transmissions: "4-speed automatic (V6 early), 5-speed automatic",
+                drivetrain: "Rear-wheel drive, Primary Part-time 4WD, or Full-time Multi-Mode 4WD",
+                iconicFeatures: [
+                    "Available 4.7L V8 engine with massive low-end torque",
+                    "Downhill Assist Control (DAC) and Hill Start Assist Control (HAC)",
+                    "X-REAS Sport Enhancement Suspension",
+                    "Power rear liftgate window retained"
+                ],
+                designHistory: "Chunky, muscular styling with flared fenders and integrated roof rack crossbars. Interior quality leaped forward with automatic climate control and premium audio options."
+            },
+            {
+                id: 5,
+                name: "5th Generation",
+                years: "2010 – 2024",
+                category: "modern",
+                codename: "N280",
+                tagline: "The Indestructible Trail Master",
+                summary: "Spanning over a decade with timeless mechanical reliability, the 5th Gen introduced the iconic TRD Pro trim, KDSS suspension, and Crawl Control, becoming an off-road phenomenon.",
+                image: "gen5.jpg",
+                fallbackSvg: "5th Gen 4Runner",
+                engines: [
+                    { name: "2.7L 2TR-FE I4 (2010 only)", hp: "157 hp", torque: "178 lb-ft" },
+                    { name: "4.0L 1GR-FE Dual VVT-i V6", hp: "270 hp", torque: "278 lb-ft" }
+                ],
+                transmissions: "5-speed automatic",
+                drivetrain: "Rear-wheel drive, Part-time 4WD, or Full-time 4WD with Torsen limited-slip center diff",
+                iconicFeatures: [
+                    "TRD Pro trim with Fox internal bypass shocks and TRD skid plate",
+                    "Kinetic Dynamic Suspension System (KDSS) for ultimate articulation",
+                    "Multi-Terrain Select and Crawl Control (CRAWL)",
+                    "Roll-down vertical rear hatch window"
+                ],
+                designHistory: "Bold, aggressive front fascia with boxy, aggressive lines that scream durability. It became the gold standard for modern overlanding builds."
+            },
+            {
+                id: 6,
+                name: "6th Generation",
+                years: "2025 – Present",
+                category: "modern",
+                codename: "N350",
+                tagline: "The Next-Gen Turbocharged Off-Road Titan",
+                summary: "Built on the rugged TNGA-F global truck platform, the all-new 6th Generation brings high-torque turbocharged 4-cylinder engines, hybrid i-FORCE MAX power, and cutting-edge tech.",
+                image: "gen6.jpg",
+                fallbackSvg: "6th Gen 4Runner",
+                engines: [
+                    { name: "2.4L Turbocharged i-FORCE I4", hp: "278 hp", torque: "317 lb-ft" },
+                    { name: "2.4L Turbo Hybrid i-FORCE MAX", hp: "326 hp", torque: "465 lb-ft" }
+                ],
+                transmissions: "8-speed automatic",
+                drivetrain: "Part-time or Full-time 4WD with electronic locking differential",
+                iconicFeatures: [
+                    "TNGA-F high-strength boxed steel ladder frame",
+                    "Available i-FORCE MAX Hybrid powertrain with 465 lb-ft of torque",
+                    "Disconnecting front stabilizer bar for maximum articulation",
+                    "Modern 14-inch touchscreen with wireless Apple CarPlay & Android Auto"
+                ],
+                designHistory: "Drawing design cues from Toyota Baja racing trucks, the 6th Gen pairs heritage touches like the signature wrap-around rear quarter windows with ultra-modern rugged styling."
+            }
+        ];
+
+        let currentFilter = 'all';
+        let searchQuery = '';
+
+        function renderGenerations() {
+            const grid = document.getElementById('generationsGrid');
+            const noResults = document.getElementById('noResults');
+
+            const filtered = generations.filter(gen => {
+                const matchesFilter = currentFilter === 'all' || gen.category === currentFilter;
+                const query = searchQuery.toLowerCase();
+                const matchesSearch =
+                    gen.name.toLowerCase().includes(query) ||
+                    gen.years.toLowerCase().includes(query) ||
+                    gen.codename.toLowerCase().includes(query) ||
+                    gen.tagline.toLowerCase().includes(query) ||
+                    gen.summary.toLowerCase().includes(query) ||
+                    gen.engines.some(e => e.name.toLowerCase().includes(query)) ||
+                    gen.iconicFeatures.some(f => f.toLowerCase().includes(query));
+                return matchesFilter && matchesSearch;
+            });
+
+            if (filtered.length === 0) {
+                grid.innerHTML = '';
+                noResults.classList.remove('hidden');
+                return;
+            }
+
+            noResults.classList.add('hidden');
+            grid.innerHTML = filtered.map(gen => `
+                <div class="rugged-card rounded-2xl overflow-hidden flex flex-col transition-all duration-300 group">
+                    <div class="relative h-56 overflow-hidden bg-rugged-900">
+                        <img src="${gen.image}" alt="${gen.name}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90" onerror="this.src='https://placehold.co/800x500/171a18/c28e38?text=Toyota+4Runner+${gen.id}th+Gen'">
+                        <div class="absolute inset-0 bg-gradient-to-t from-rugged-950 via-transparent to-transparent"></div>
+                        <div class="absolute top-3 left-3 px-3 py-1 bg-rugged-950/80 backdrop-blur-md border border-bronze-500/30 rounded-lg text-bronze-500 text-xs font-heading font-bold uppercase">
+                            ${gen.codename}
+                        </div>
+                        <div class="absolute bottom-3 left-3 right-3 flex justify-between items-end">
+                            <span class="text-xs font-semibold px-2.5 py-1 bg-bronze-500 text-black font-heading rounded-md">
+                                ${gen.years}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="p-6 flex flex-col flex-grow">
+                        <div class="text-xs text-bronze-500 font-heading font-bold uppercase tracking-wider mb-1">${gen.tagline}</div>
+                        <h3 class="text-2xl font-bold font-heading text-white mb-3 group-hover:text-bronze-500 transition-colors">${gen.name}</h3>
+                        <p class="text-gray-400 text-sm mb-6 flex-grow line-clamp-3">${gen.summary}</p>
+
+                        <div class="pt-4 border-t border-rugged-800 flex items-center justify-between">
+                            <div class="text-xs text-gray-400">
+                                <i class="fa-solid fa-gauge-high text-bronze-500 mr-1.5"></i> ${gen.engines.length} Engine option${gen.engines.length > 1 ? 's' : ''}
+                            </div>
+                            <button onclick="openModal(${gen.id})" class="px-4 py-2 bg-rugged-900 hover:bg-bronze-500 hover:text-black border border-bronze-500/40 text-bronze-500 font-heading font-bold text-xs uppercase rounded-xl transition-all flex items-center space-x-2">
+                                <span>View Specs</span>
+                                <i class="fa-solid fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function filterGenerations(category) {
+            currentFilter = category;
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('bg-bronze-500', 'text-black');
+                btn.classList.add('bg-rugged-900', 'text-gray-300', 'border', 'border-rugged-800');
+            });
+            const activeBtn = document.getElementById(`filter-${category}`);
+            if (activeBtn) {
+                activeBtn.classList.remove('bg-rugged-900', 'text-gray-300', 'border', 'border-rugged-800');
+                activeBtn.classList.add('bg-bronze-500', 'text-black');
+            }
+            renderGenerations();
+        }
+
+        document.getElementById('searchInput').addEventListener('input', (e) => {
+            searchQuery = e.target.value;
+            renderGenerations();
+        });
+
+        function openModal(id) {
+            const gen = generations.find(g => g.id === id);
+            if (!gen) return;
+
+            const modalBody = document.getElementById('modalBody');
+            modalBody.innerHTML = `
+                <div class="relative h-72 sm:h-96 overflow-hidden">
+                    <img src="${gen.image}" alt="${gen.name}" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/1200x600/171a18/c28e38?text=Toyota+4Runner+${gen.id}th+Gen'">
+                    <div class="absolute inset-0 bg-gradient-to-t from-rugged-950 via-rugged-950/40 to-transparent"></div>
+                    <div class="absolute bottom-6 left-6 right-6">
+                        <div class="flex items-center space-x-3 mb-2">
+                            <span class="px-3 py-1 bg-bronze-500 text-black text-xs font-heading font-bold rounded-lg uppercase">${gen.years}</span>
+                            <span class="px-3 py-1 bg-rugged-900/80 backdrop-blur-md border border-bronze-500/40 text-bronze-500 text-xs font-heading font-bold rounded-lg uppercase">Codename: ${gen.codename}</span>
+                        </div>
+                        <h2 class="text-3xl sm:text-4xl font-extrabold font-heading text-white">${gen.name}</h2>
+                        <p class="text-bronze-500 font-heading font-medium text-sm sm:text-base">${gen.tagline}</p>
+                    </div>
+                </div>
+
+                <div class="p-6 sm:p-8 space-y-8">
+                    <div>
+                        <h4 class="text-xs font-heading font-bold uppercase tracking-widest text-bronze-500 mb-2">Design & Heritage History</h4>
+                        <p class="text-gray-300 text-sm sm:text-base leading-relaxed">${gen.designHistory}</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-rugged-900/80 border border-rugged-800 rounded-xl p-5">
+                            <h4 class="text-xs font-heading font-bold uppercase tracking-widest text-bronze-500 mb-3 flex items-center">
+                                <i class="fa-solid fa-engine mr-2"></i> Engine Options
+                            </h4>
+                            <ul class="space-y-3">
+                                ${gen.engines.map(eng => `
+                                    <li class="border-b border-rugged-800 pb-2.5 last:border-0 last:pb-0">
+                                        <div class="font-bold text-white text-sm">${eng.name}</div>
+                                        <div class="text-xs text-gray-400 mt-0.5"><span class="text-bronze-500 font-semibold">${eng.hp}</span> &bull; <span class="text-gray-300">${eng.torque}</span></div>
+                                    </li>
+                                `).join('')}
+                            </ul>
+                        </div>
+
+                        <div class="bg-rugged-900/80 border border-rugged-800 rounded-xl p-5 space-y-4">
+                            <div>
+                                <h4 class="text-xs font-heading font-bold uppercase tracking-widest text-bronze-500 mb-2 flex items-center">
+                                    <i class="fa-solid fa-gear mr-2"></i> Transmissions
+                                </h4>
+                                <p class="text-sm text-gray-300">${gen.transmissions}</p>
+                            </div>
+                            <div class="pt-3 border-t border-rugged-800">
+                                <h4 class="text-xs font-heading font-bold uppercase tracking-widest text-bronze-500 mb-2 flex items-center">
+                                    <i class="fa-solid fa-compass mr-2"></i> Drivetrain System
+                                </h4>
+                                <p class="text-sm text-gray-300">${gen.drivetrain}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h4 class="text-xs font-heading font-bold uppercase tracking-widest text-bronze-500 mb-3 flex items-center">
+                            <i class="fa-solid fa-star mr-2"></i> Iconic Features & Milestones
+                        </h4>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            ${gen.iconicFeatures.map(feat => `
+                                <div class="bg-rugged-900/50 border border-rugged-800/80 rounded-xl p-3.5 flex items-start space-x-3">
+                                    <i class="fa-solid fa-check text-bronze-500 mt-1"></i>
+                                    <span class="text-sm text-gray-300">${feat}</span>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            const modal = document.getElementById('detailModal');
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            modal.querySelector('.transform').classList.remove('scale-95');
+            modal.querySelector('.transform').classList.add('scale-100');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('detailModal');
+            modal.classList.add('opacity-0', 'pointer-events-none');
+            modal.querySelector('.transform').classList.remove('scale-100');
+            modal.querySelector('.transform').classList.add('scale-95');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal on background click
+        document.getElementById('detailModal').addEventListener('click', (e) => {
+            if (e.target === document.getElementById('detailModal')) {
+                closeModal();
+            }
+        });
+
+        // Close modal on ESC key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+
+        // Initial render
+        window.onload = function() {
+            renderGenerations();
+        };
+    </script>
+</body>
+</html>
