@@ -1,0 +1,37 @@
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #0e100f;
+    color: #e5e7eb;
+}
+
+h1, h2, h3, h4, .font-heading {
+    font-family: 'Chakra Petch', sans-serif;
+}
+
+.rugged-card {
+    background: linear-gradient(145deg, #171a18 0%, #121513 100%);
+    border: 1px solid rgba(194, 142, 56, 0.2);
+    box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);
+}
+
+.rugged-card:hover {
+    border-color: rgba(194, 142, 56, 0.5);
+    box-shadow: 0 15px 35px -10px rgba(194, 142, 56, 0.15);
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+    width: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+    background: #0e100f;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #2a342e;
+    border-radius: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #c28e38;
+}

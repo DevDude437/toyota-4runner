@@ -1,2 +1,2 @@
-## The 2nd Generation Toyota 4Runner
-The 2nd Gen Toyota 4Runner, produced from 1990-95, is a body on frame SUV made by Toyota. I have complete information about it on my [website](https://devdude437.github.io/toyota-4runner/).
+# Toyota 4Runner Website
+This website contains complete information on every Toyota 4Runner Generation. From the barebones 1st Gen to the modern 6th Gen, all the info you need is here. Be sure to star ⭐ the repo if you enjoy the website!
